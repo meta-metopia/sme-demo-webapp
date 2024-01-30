@@ -5,13 +5,13 @@
 
 import Link from "next/link";
 
-function getTotalPrice(dishes: any) {
+function getTotalPrice(dishes: any){
   let totalPrice = 0;
   Object.keys(dishes).map((dish) => {
     totalPrice +=
       parseFloat(dishes[dish].price) * parseInt(dishes[dish].quantity);
   });
-  return totalPrice.toFixed(2);
+  return totalPrice;
 }
 
 export async function OrderSummary({ id }: { id: string }) {
@@ -42,6 +42,7 @@ export async function OrderSummary({ id }: { id: string }) {
   const dishes = orderData.document.dishes;
   const orderTime = orderData.document.createTime;
   const stdTime = new Date(orderTime);
+  const totalPrice = getTotalPrice(dishes).toString();
 
   return (
     <div key="1" className="flex flex-col h-screen bg-white">
@@ -99,9 +100,9 @@ export async function OrderSummary({ id }: { id: string }) {
       <footer className="border-t border-gray-200 px-4 py-2">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-semibold text-lg">Total</h2>
-          <p className="font-semibold text-lg">${getTotalPrice(dishes)}</p>
+          <p className="font-semibold text-lg">${getTotalPrice(dishes).toFixed(2)}</p>
         </div>
-        <Link href={"/order/confirm"}>
+        <Link href={"/order/confirm/"+totalPrice}>
           <button className="w-full h-10 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-md shadow-md transform transition hover:scale-105">
             Pay Now
           </button>

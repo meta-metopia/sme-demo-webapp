@@ -11,7 +11,7 @@ export async function get_eft_session(amount: string) {
       body: JSON.stringify({
         from: "0x50B875325d23a8352256221Cf2f297DED9221b35",
         to: "kongshum",
-        amount: "0.1",
+        amount: amount,
         description: "propertyPayment",
         pps_id: "000001990099",
         payment_type: "WECHAT",
