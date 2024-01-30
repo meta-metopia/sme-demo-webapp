@@ -30,7 +30,7 @@ export async function OrderSummary({ id }: { id: string }) {
         pipeline: [
           {
             "$match": {
-              "chatRoomId": id
+              "id": id
             }
           },
           {
@@ -64,12 +64,11 @@ export async function OrderSummary({ id }: { id: string }) {
   const orderData = await response.json();
   const orders = orderData.documents;
   if (orders.length === 0) {
-    return <div>Failed to load order summary</div>;
+    return <div>No orders found</div>;
   }
 
   const order = orders[0];
   const dishes = order.Dishes
-  console.log("orderData", dishes);
   const orderTime = order.createdAt;
   const totalPrice = getTotalPrice(dishes).toString();
 
