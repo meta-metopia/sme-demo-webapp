@@ -37,8 +37,6 @@ export function PaymentConfirmation(url: any) {
           <div className="py-4"></div>
           <a
             href={url.url}
-            target="_blank"
-            rel="noopener noreferrer"
             onClick={() => setPaymentMethod("FPS")}
             className="flex flex-col items-center pt-4"
           >
