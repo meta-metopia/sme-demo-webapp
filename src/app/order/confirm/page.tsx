@@ -8,7 +8,7 @@ export const metadata = {
 
 export default async function page() {
   const session = await get_eft_session("0.1");
-  const eft_url = process.env.NEXT_PUBLIC_EFT_BASE_URL + session;
+  const eft_url = (process.env.NEXT_PUBLIC_EFT_BASE_URL + session) as string;
 
   return <PaymentConfirmation url={eft_url} />;
 }
