@@ -18,7 +18,7 @@ export async function get_eft_session(amount: string) {
         wallet_address: "0x50B875325d23a8352256221Cf2f297DED9221b35",
         building_code: "TS0000",
         cust_id: "TS0000",
-        goods_name: "SME_FEE",
+        goods_name: "X記茶餐廳",
         is_property_fee: "true",
         user_id: "1",
         user_name: "kss36",
