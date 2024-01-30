@@ -1,5 +1,5 @@
 import React from "react";
-import {ProfileCredit} from "@/components/profile-credit";
+import { ProfileCredit } from "@/components/profile-credit";
 
 export default function page({ params }: any) {
   const { id } = params;
