@@ -6,6 +6,8 @@ export const metadata = {
   title: "Payment Confirmation",
 };
 
+export const runtime = "edge";
+
 export default async function page({ params }: any) {
   const { amount } = params
   const session = await get_eft_session(amount);
