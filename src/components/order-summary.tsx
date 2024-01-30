@@ -9,14 +9,14 @@ function getTotalPrice(dishes: any){
   let totalPrice = 0;
   Object.keys(dishes).map((dish) => {
     totalPrice +=
-      parseFloat(dishes[dish].price) * parseInt(dishes[dish].quantity);
+        dishes[dish].price
   });
   return totalPrice;
 }
 
 export async function OrderSummary({ id }: { id: string }) {
   const response = await fetch(
-    process.env.MONGODB_API_URL + "/action/findOne",
+    process.env.MONGODB_API_URL + "/action/aggregate",
     {
       method: "POST",
       headers: {
@@ -24,24 +24,53 @@ export async function OrderSummary({ id }: { id: string }) {
         contentType: "application/json",
       },
       body: JSON.stringify({
-        collection: "order",
-        database: "sme-demo",
-        dataSource: "RJdid",
-        filter: {
-          chatRoomId: id,
-        },
+        collection: "Orders",
+        database: "eft-demo",
+        dataSource: "demo",
+        pipeline: [
+          {
+            "$match": {
+              "chatRoomId": id
+            }
+          },
+          {
+            "$lookup": {
+              "from": "Dish",
+              "localField": "Dishes",
+              "foreignField": "_id",
+              "as": "dishesInfo"
+            }
+          },
+          {
+            "$addFields": {
+              "Dishes": "$dishesInfo"
+            }
+          },
+          {
+            "$project": {
+              "dishesInfo": 0
+            }
+          }
+        ]
       }),
     },
   );
+
 
   if (!response.ok) {
     return <div>Failed to load order summary</div>;
   }
 
   const orderData = await response.json();
-  const dishes = orderData.document.dishes;
-  const orderTime = orderData.document.createTime;
-  const stdTime = new Date(orderTime);
+  const orders = orderData.documents;
+  if (orders.length === 0) {
+    return <div>Failed to load order summary</div>;
+  }
+
+  const order = orders[0];
+  const dishes = order.Dishes
+  console.log("orderData", dishes);
+  const orderTime = order.createdAt;
   const totalPrice = getTotalPrice(dishes).toString();
 
   return (
@@ -49,21 +78,11 @@ export async function OrderSummary({ id }: { id: string }) {
       <header className="border-b border-gray-200 px-4 py-2">
         <h1 className="font-semibold text-lg">Order Summary</h1>
         <p className="text-sm text-gray-500">
-          订单编号: {orderData.document._id}
+          订单编号: {order._id}
         </p>
         <p className="text-sm text-gray-500">
           订单时间:{" "}
-          {stdTime.getFullYear() +
-            "-" +
-            (stdTime.getMonth() + 1) +
-            "-" +
-            stdTime.getDate() +
-            " " +
-            stdTime.getHours() +
-            ":" +
-            stdTime.getMinutes() +
-            ":" +
-            stdTime.getSeconds()}
+          {orderTime}
         </p>
       </header>
       <main className="flex-1 overflow-y-auto border-b border-gray-200 px-4 py-2">
@@ -77,7 +96,7 @@ export async function OrderSummary({ id }: { id: string }) {
                 alt="Food Image"
                 className="w-16 h-16 object-cover rounded-md"
                 height="100"
-                src={dishes[key].imageUrl}
+                src={dishes[key].image}
                 style={{
                   aspectRatio: "100/100",
                   objectFit: "cover",
