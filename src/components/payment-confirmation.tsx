@@ -13,10 +13,9 @@ class PaymentMethod {
   "EFT" = "EFT"
 }
 
-export function PaymentConfirmation() {
-  const eft_url = process.env.NEXT_PUBLIC_EFT_URL;
-  console.log("enf is" + eft_url);
+export function PaymentConfirmation(url : any) {
   const [paymentMethod, setPaymentMethod] = useState("EMPTY");
+  console.log(url);
 
   return (
     <div key="1" className="flex flex-col h-screen">
@@ -51,7 +50,7 @@ export function PaymentConfirmation() {
       </main>
       <footer className="p-4 border-t">
   {paymentMethod === 'EFT' ? (
-    <a href={eft_url} target="_blank" rel="noopener noreferrer">
+    <a href={url} target="_blank" rel="noopener noreferrer">
       <button className="w-full h-10 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-md shadow-md transform transition hover:scale-105">
         Confirm Payment Method
       </button>
