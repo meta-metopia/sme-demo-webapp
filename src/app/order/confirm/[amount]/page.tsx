@@ -4,6 +4,7 @@ import { get_eft_session } from "@/components/get_eft_session";
 
 export const metadata = {
   title: "Payment Confirmation",
+  description: "Payment Confirmation",
 };
 
 export const runtime = "edge";
