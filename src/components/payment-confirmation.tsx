@@ -16,10 +16,10 @@ export function PaymentConfirmation(url: any) {
   return (
     <div key="1" className="flex flex-col h-screen">
       <header className="flex items-center justify-between p-4 border-b">
-          <Button onClick={()=> router.back()} size="icon" variant="ghost">
-            <ArrowLeftIcon className="h-4 w-4" />
-            <span className="sr-only">Back</span>
-          </Button>
+        <Button onClick={() => router.back()} size="icon" variant="ghost">
+          <ArrowLeftIcon className="h-4 w-4" />
+          <span className="sr-only">Back</span>
+        </Button>
         <h1 className="text-lg font-semibold">Payment Method</h1>
         <div className="w-8" />
       </header>
@@ -29,10 +29,7 @@ export function PaymentConfirmation(url: any) {
             Supported Payment Methods
           </h2>
           <div className="py-4"></div>
-          <a
-            href={url.url}
-            className="flex flex-col items-center pt-4"
-          >
+          <a href={url.url} className="flex flex-col items-center pt-4">
             <img className="h-88 rounded-md mx-auto" src="/payment.png" />
           </a>
         </div>
