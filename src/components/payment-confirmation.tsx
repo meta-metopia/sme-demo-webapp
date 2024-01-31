@@ -34,7 +34,7 @@ export function PaymentConfirmation(url: any) {
           </a>
         </div>
       </main>
-      <footer className="p-4 text-center">
+      <footer className="p-4 text-center fixed bottom-1 w-full">
         Payment service provided by EFTPay
       </footer>
     </div>

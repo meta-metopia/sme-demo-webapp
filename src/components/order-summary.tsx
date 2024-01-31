@@ -106,7 +106,7 @@ export async function OrderSummary({ id }: { id: string }) {
           ))}
         </div>
       </main>
-      <footer className="border-t border-gray-200 px-4 py-2">
+      <footer className="border-t border-gray-200 px-4 py-2 fixed bottom-1 w-full">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-semibold text-lg">Total</h2>
           <p className="font-semibold text-lg">
