@@ -75,12 +75,12 @@ export async function OrderSummary({ id }: { id: string }) {
   return (
     <div key="1" className="flex flex-col h-screen bg-white">
       <header className="border-b border-gray-200 px-4 py-2">
-        <h1 className="font-semibold text-lg">Order Summary</h1>
+        <h1 className="font-semibold text-lg text-xl">訂單信息</h1>
         <p className="text-sm text-gray-500">
-          订单编号: {order._id}
+          訂單編號: {order._id}
         </p>
         <p className="text-sm text-gray-500">
-          订单时间:{" "}
+          訂單時間:{" "}
           {orderTime}
         </p>
       </header>
@@ -105,7 +105,7 @@ export async function OrderSummary({ id }: { id: string }) {
               <div className="flex-1">
                 <h2 className="font-semibold text-base">{dishes[key].name}</h2>
                 <p className="text-sm text-gray-500">
-                  Quantity: {dishes[key].quantity}
+                  數量: 1
                 </p>
               </div>
               <p className="font-semibold text-base">

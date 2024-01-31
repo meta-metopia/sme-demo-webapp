@@ -7,25 +7,19 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { JSX, SVGProps, useState } from "react";
-
-class PaymentMethod {
-  "FPS" = "FPS";
-  "EFT" = "EFT";
-}
+import { useRouter } from "next/navigation";
 
 export function PaymentConfirmation(url: any) {
-  const [paymentMethod, setPaymentMethod] = useState("EMPTY");
+  const router = useRouter();
   console.log(url);
 
   return (
     <div key="1" className="flex flex-col h-screen">
       <header className="flex items-center justify-between p-4 border-b">
-        <Link href="/order/summary">
-          <Button size="icon" variant="ghost">
+          <Button onClick={()=> router.back()} size="icon" variant="ghost">
             <ArrowLeftIcon className="h-4 w-4" />
             <span className="sr-only">Back</span>
           </Button>
-        </Link>
         <h1 className="text-lg font-semibold">Payment Method</h1>
         <div className="w-8" />
       </header>
@@ -37,7 +31,6 @@ export function PaymentConfirmation(url: any) {
           <div className="py-4"></div>
           <a
             href={url.url}
-            onClick={() => setPaymentMethod("FPS")}
             className="flex flex-col items-center pt-4"
           >
             <img className="h-88 rounded-md mx-auto" src="/payment.png" />
