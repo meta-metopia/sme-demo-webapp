@@ -5,7 +5,7 @@ export const runtime = "edge";
 export const metadata = {
   title: "Payment Successful",
   description: "Payment Successful",
-}
+};
 
 export default function page() {
   return <PaymentSuccessful />;
